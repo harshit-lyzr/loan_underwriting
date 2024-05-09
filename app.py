@@ -46,7 +46,7 @@ open_ai_text_completion_model = OpenAIModel(
 
 
 def generate_underwriting():
-    neurology_agent = Agent(
+    loan_agent = Agent(
         role="Loan Consultant",
         prompt_persona=f"You are an Expert Loan Underwriter.Your Task is to generate Executive summary,Business Description and sector analysis."
     )
@@ -88,18 +88,18 @@ def generate_underwriting():
     These sections provide a comprehensive overview of the business and its operating environment, aiding the underwriter in assessing the loan request.
     """
 
-    neurology_task = Task(
-        name="Neurology Consult",
+    loan_task = Task(
+        name="loan Consult",
         model=open_ai_text_completion_model,
-        agent=neurology_agent,
+        agent=loan_agent,
         instructions=prompt,
     )
 
     output = LinearSyncPipeline(
-        name="Neurology Consult Pipline",
+        name="loan underwriting Pipline",
         completion_message="pipeline completed",
         tasks=[
-            neurology_task
+            loan_task
         ],
     ).run()
 
